@@ -5,13 +5,23 @@ import { StatusBar } from 'expo-status-bar';
 import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import { CardIcon, DishRow } from '../components';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../slices/restaurantSlices';
+
 
 
 export default function RestaurantScreen() {
     const { params } = useRoute();
     const navigation = useNavigation();
     let item = params;
-    // console.log(item)
+    const dispath = useDispatch();
+    //console.log(item)
+    React.useEffect(() => {
+        if (item && item.id) {
+            dispath(setRestaurant({ ...item }))
+        }
+    }, []);
+
     return (
         <View>
             <CardIcon />
